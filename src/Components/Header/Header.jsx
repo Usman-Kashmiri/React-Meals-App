@@ -1,6 +1,12 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
-function Header() {
+function Header( {term, searchHandler} ) {
+    const searchedValue = useRef("");
+
+    const getSearchedContact = () => {
+        searchHandler(searchedValue.current.value)
+    }
+
     return (
         <header>
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark" aria-label="Third navbar example">
@@ -27,7 +33,7 @@ function Header() {
                             </li>
                         </ul>
                         <form>
-                            <input className="form-control" type="text" placeholder="Search" aria-label="Search" />
+                            <input ref={searchedValue} value={term} onChange={getSearchedContact} className="form-control" type="text" placeholder="Search" aria-label="Search" />
                         </form>
                     </div>
                 </div>
